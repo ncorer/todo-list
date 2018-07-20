@@ -66,6 +66,10 @@ public class ActivityFxModel {
 		this.allCategories = allCategories;
 	}
 	
+	public void setAllCategories(List<Category> allCategories) {
+		this.allCategories.setAll(allCategories);
+	}
+	
 	public String getTitle() {
 		return title.get();
 	}

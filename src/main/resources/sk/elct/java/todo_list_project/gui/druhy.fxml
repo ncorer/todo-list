@@ -7,17 +7,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="imageView" fitHeight="677.0" fitWidth="966.0" layoutX="-15.0" layoutY="-77.0" pickOnBounds="true">
-         <image>
-            <Image url="@wall3.jpg" />
-         </image>
-      </ImageView>
       <TableView fx:id="activityTableView" layoutX="26.0" layoutY="171.0" prefHeight="291.0" prefWidth="654.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="30.0" />
       <Label layoutX="26.0" layoutY="47.0" text="Title:" />
       <Label layoutX="169.0" layoutY="47.0" text="Priority:" />
@@ -30,10 +23,13 @@
       <Label layoutX="502.0" layoutY="47.0" text="Progress:" />
       <Label layoutX="608.0" layoutY="47.0" text="Category:" />
       <Button fx:id="addButton" layoutX="274.0" layoutY="103.0" mnemonicParsing="false" text="Add activity" />
-      <ComboBox fx:id="categoryComboBox" layoutX="664.0" layoutY="43.0" prefWidth="150.0" />
+      <ComboBox fx:id="categoryComboBox" layoutX="664.0" layoutY="43.0" prefHeight="25.0" prefWidth="304.0" />
       <Button fx:id="editActivityButton" layoutX="360.0" layoutY="103.0" mnemonicParsing="false" text="Edit activity" />
-      <Button fx:id="clearFieldsButton" layoutX="637.0" layoutY="129.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="177.0" text="Clear fields" />
+      <Button fx:id="clearFieldsButton" layoutX="754.0" layoutY="129.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="216.0" text="Clear fields" />
       <Button fx:id="deleteActivityButton" layoutX="442.0" layoutY="103.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Delete activity" />
       <DatePicker fx:id="datePicker" layoutX="319.0" layoutY="43.0" />
+      <Button fx:id="changeCategoryButton" layoutX="773.0" layoutY="78.0" mnemonicParsing="false" text="Edit category" />
+      <Button fx:id="addCategoryButton" layoutX="664.0" layoutY="78.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Add category" />
+      <Button fx:id="deleteCategoryButton" layoutX="870.0" layoutY="78.0" mnemonicParsing="false" text="Delete category" />
    </children>
 </AnchorPane>

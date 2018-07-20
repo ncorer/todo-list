@@ -1,5 +1,6 @@
 package sk.elct.java.todo_list_project.gui;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -20,6 +24,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.converter.LocalDateStringConverter;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import javafx.util.converter.NumberStringConverter;
@@ -28,6 +34,8 @@ import sk.elct.java.todo_list_project.ActivityDao;
 import sk.elct.java.todo_list_project.Category;
 import sk.elct.java.todo_list_project.CategoryDao;
 import sk.elct.java.todo_list_project.DaoFactory;
+
+
 
 
 
@@ -84,6 +92,15 @@ public class DruhyController {
     
     @FXML
     private DatePicker datePicker;
+    
+    @FXML
+    private Button changeCategoryButton;
+
+    @FXML
+    private Button addCategoryButton;
+ 
+    @FXML
+    private Button deleteCategoryButton;
     
     @FXML
     void initialize() {
@@ -198,6 +215,72 @@ public class DruhyController {
     				
     			}
     		});
+      	
+       	addCategoryButton.setOnAction(new EventHandler<ActionEvent>() {
+
+   			@Override
+			public void handle(ActionEvent event) {
+
+				try {
+					EditCategoryController controller = new EditCategoryController();
+					
+					FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("editCategory.fxml"));
+					fmxlLoader.setController(controller);
+					Parent rootPane = fmxlLoader.load();
+						
+					Scene scene = new Scene(rootPane);
+					Stage stage = new Stage();
+					stage.setTitle("Add category " + selectedActivity.getCategory());
+					stage.setScene(scene);
+					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.showAndWait();
+					selectedActivity.setAllCategories(categoryDao.getAll());
+
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+			}
+  	});
+       	
+      	changeCategoryButton.setOnAction(new EventHandler<ActionEvent>() {
+
+    			@Override
+    			public void handle(ActionEvent event) {
+
+    				try {
+						EditCategoryController controller = new EditCategoryController(selectedActivity.getCategory());
+						
+						FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("editCategory.fxml"));
+						fmxlLoader.setController(controller);
+						Parent rootPane = fmxlLoader.load();
+							
+						Scene scene = new Scene(rootPane);
+						Stage stage = new Stage();
+						stage.setTitle("Change category " + selectedActivity.getCategory());
+						stage.setScene(scene);
+						stage.initModality(Modality.APPLICATION_MODAL);
+						stage.showAndWait();
+						selectedActivity.setAllCategories(categoryDao.getAll());
+						observableActivities.setAll(activityDao.getAll());
+					} catch (IOException e) {
+
+						e.printStackTrace();
+					}
+    			}
+      	});
+      	
+     	deleteCategoryButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				categoryDao.delete(selectedActivity.getCategory().getId());
+				selectedActivity.setAllCategories(categoryDao.getAll());
+				observableActivities.setAll(activityDao.getAll());
+			}
+  	});
+      	
       	
       	
        	activityTableView.setItems(observableActivities);	
